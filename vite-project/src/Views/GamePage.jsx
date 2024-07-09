@@ -8,6 +8,7 @@ import { computerContext } from '../context/computerContext'
 
 
 export default function () {
+  
 const {player,setPlayer} = useContext(playerContext)
 const {computer,setComputer} =useContext(computerContext)
   const navigate = useNavigate()
@@ -27,11 +28,6 @@ const {computer,setComputer} =useContext(computerContext)
   const [playerCounter,setPlayerCounter] =useState(0)
   const [computerCounter,setComputerCounter] =useState(0)
 
-  
-
- 
-
-
   function randomizeCards(root) {
     const shuffledRoot = root.sort(() => Math.random() - 0.5);
     const halfway = Math.floor(shuffledRoot.length / 2);
@@ -47,9 +43,6 @@ const {computer,setComputer} =useContext(computerContext)
     
     
 }
-
-
-
  
   useEffect(()=>{
     randomizeCards(deck)
@@ -78,41 +71,19 @@ function nextCard() {
 
 
 
-
-
-
-
-  
-
-  
-  
-  
-
-  useEffect(()=>{
-    setPlayerCounter(0)
-    setComputerCounter(0)
-  },[])
-
-
-
-
-
   useEffect(()=>{
     console.log(player)
   },[player])
-
-  
-
 
 
 
 
 return (
   <div>
-    <div  style={{width :"400px", display:"flex",justifyContent:"space-around"}}>
+    <div  style={{width :"400px",height:"100px" , display:"flex",justifyContent:"center",alignItems:"end"}}>
       <h1>Computer: {computerCounter}</h1>
     </div>
-    <div style={{height:"600px",display:'flex', flexDirection:'column',justifyContent:"space-between"}}>
+    <div style={{marginTop:"5px",height:"600px",display:'flex', flexDirection:'column',justifyContent:"space-around"}}>
        {computer.cardDeck ? <Card number=  {computer.cardDeck[computer.cardDeck.length - 1]} />: <></>}
    
        {player.cardDeck ? <Card number={player.cardDeck[player.cardDeck.length-1]} />: <></>}
@@ -121,7 +92,7 @@ return (
     </div>
     <div style={{display:"flex", flexDirection:"row-reverse",justifyContent:'space-between'}}>
       <h1 style={{marginRight:"20px"}}>Player: {playerCounter}</h1>
-      <button onClick={nextCard} style={{width:"100px",height:"80px",marginTop:"30px",marginLeft:"20px"}} >next</button>
+      <button onClick={nextCard} style={{width:"100px",height:"80px",marginTop:"20px",marginLeft:"20px"}} >next</button>
     </div>
   </div>
 );

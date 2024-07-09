@@ -34,7 +34,7 @@ export default function () {
        navigate("/game")
   }
   return ( 
-  <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop:"25%", height:"300px"}}>
+  <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop:"10%", height:"300px"}}>
     <div style={{display:"flex", flexDirection:"column", justifyContent:"space-around"}}>
      <h1 style={{color:"red"}}> ready for war!</h1>
      <input onChange={(e)=>{setName(e.target.value)}} placeholder='enter your name' type="text" />

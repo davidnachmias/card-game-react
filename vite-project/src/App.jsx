@@ -1,5 +1,5 @@
 import {useContext, useState } from 'react';
-import './App.css';
+import './App.css'
 import HomePage from './Views/HomePage';
 import GamePage from './Views/GamePage';
 import ScorePage from './Views/ScorePage';
