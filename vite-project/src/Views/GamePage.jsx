@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
 import Card from '../Components/Card'
+import ScorePage from './ScorePage'
+import { useNavigate } from 'react-router-dom'
+import { playerContext } from '../context/playerContext'
+import { computerContext } from '../context/computerContext'
 
 
-export default function ({setPlayer,setComputer,SetPage,player,computer}) {
-
-  
+export default function () {
+const {player,setPlayer} = useContext(playerContext)
+const {computer,setComputer} =useContext(computerContext)
+  const navigate = useNavigate()
   function cardDeck(){
     let deck = []
      for(let i = 1;i<=13;i++){
@@ -18,6 +23,11 @@ export default function ({setPlayer,setComputer,SetPage,player,computer}) {
   const [deck,setDeck]=useState(()=>{
    return cardDeck()
   })
+
+  const [playerCounter,setPlayerCounter] =useState(0)
+  const [computerCounter,setComputerCounter] =useState(0)
+
+  
 
  
 
@@ -46,6 +56,52 @@ export default function ({setPlayer,setComputer,SetPage,player,computer}) {
 }, [])
 
 
+function nextCard() {
+  const newPlayerDeck = [...player.cardDeck];
+  const newComputerDeck = [...computer.cardDeck];
+
+   const playerCard=newPlayerDeck.pop();
+   const computerCard=newComputerDeck.pop();
+  if (playerCard > computerCard) {
+     setPlayerCounter(playerCounter + 1);
+  } else if (computerCard > playerCard) {
+     setComputerCounter(computerCounter +1) 
+  } 
+  
+  setPlayer({ ...player, cardDeck: newPlayerDeck,playerCounter});
+  setComputer({ ...computer, cardDeck: newComputerDeck,computerCounter });
+
+    if (player.cardDeck.length === 1 || computer.cardDeck.length === 1) {
+      navigate("/score")
+}}
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+
+  useEffect(()=>{
+    setPlayerCounter(0)
+    setComputerCounter(0)
+  },[])
+
+
+
+
+
+  useEffect(()=>{
+    console.log(player)
+  },[player])
+
+  
 
 
 
@@ -53,23 +109,19 @@ export default function ({setPlayer,setComputer,SetPage,player,computer}) {
 
 return (
   <div>
-    <div>
-      <h1>Computer</h1>
+    <div  style={{width :"400px", display:"flex",justifyContent:"space-around"}}>
+      <h1>Computer: {computerCounter}</h1>
     </div>
     <div style={{height:"600px",display:'flex', flexDirection:'column',justifyContent:"space-between"}}>
-    {/* {computer && computer.cardDeck */}
-                 <Card number={computer.cardDeck[0]} />
-                {/* : <></>}
-    */}
-   {player && player.cardDeck
-                ? <Card number={player.cardDeck[0]} />
-                : <></>}
+       {computer.cardDeck ? <Card number=  {computer.cardDeck[computer.cardDeck.length - 1]} />: <></>}
+   
+       {player.cardDeck ? <Card number={player.cardDeck[player.cardDeck.length-1]} />: <></>}
     
     
     </div>
     <div style={{display:"flex", flexDirection:"row-reverse",justifyContent:'space-between'}}>
-      <h1 style={{marginRight:"20px"}}>Player</h1>
-      <button style={{width:"100px",height:"80px",marginTop:"30px",marginLeft:"20px"}} >next</button>
+      <h1 style={{marginRight:"20px"}}>Player: {playerCounter}</h1>
+      <button onClick={nextCard} style={{width:"100px",height:"80px",marginTop:"30px",marginLeft:"20px"}} >next</button>
     </div>
   </div>
 );

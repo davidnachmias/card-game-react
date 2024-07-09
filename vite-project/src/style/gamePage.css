@@ -1,0 +1,41 @@
+.game-container {
+    display: flex;
+    width: 400px;
+    justify-content: space-around;
+    margin: 0 auto;
+  }
+  
+  .scoreboard {
+    margin-bottom: 20px;
+  }
+  
+  .scoreboard h1 {
+    margin: 0;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    justify-content: space-between;
+  }
+  
+  .player-scoreboard {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .player-scoreboard h1 {
+    margin-right: 20px;
+    margin: 0;
+  }
+  
+  .next-button {
+    width: 100px;
+    height: 80px;
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  

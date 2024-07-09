@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { playerContext } from '../context/playerContext'
 
-export default function ({setPage,setPlayer}) {
+export default function () {
+  const {setPlayer} = useContext(playerContext)
+  const navigate = useNavigate()
   const [name,setName]=useState("")
 
   function createPlayer(){
@@ -27,13 +31,15 @@ export default function ({setPage,setPlayer}) {
     }
        const player = createPlayer()
        setPlayer(player)
-       setPage(1)
+       navigate("/game")
   }
   return ( 
-    <div>
-    <h1> ready for war!</h1>
-    <input onChange={(e)=>{setName(e.target.value)}} placeholder='enter your name' type="text" />
-    <button onClick={startGame}>start game</button>
+  <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop:"25%", height:"300px"}}>
+    <div style={{display:"flex", flexDirection:"column", justifyContent:"space-around"}}>
+     <h1 style={{color:"red"}}> ready for war!</h1>
+     <input onChange={(e)=>{setName(e.target.value)}} placeholder='enter your name' type="text" />
+     <button style={{marginTop:"10px"}} onClick={startGame}>start game</button>
     </div>
+  </div>
   )
 }
