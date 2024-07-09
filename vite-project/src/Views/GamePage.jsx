@@ -8,7 +8,6 @@ import { computerContext } from '../context/computerContext'
 
 
 export default function () {
-  
 const {player,setPlayer} = useContext(playerContext)
 const {computer,setComputer} =useContext(computerContext)
   const navigate = useNavigate()
@@ -45,11 +44,13 @@ const {computer,setComputer} =useContext(computerContext)
 }
  
   useEffect(()=>{
+    
     randomizeCards(deck)
 }, [])
 
 
 function nextCard() {
+  
   const newPlayerDeck = [...player.cardDeck];
   const newComputerDeck = [...computer.cardDeck];
 
@@ -68,7 +69,10 @@ function nextCard() {
       navigate("/score")
 }}
 
-
+ useEffect(()=>{
+  if (!player.name) {
+    navigate("/")
+}},[])
 
 
   useEffect(()=>{

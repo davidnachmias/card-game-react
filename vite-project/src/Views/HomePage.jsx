@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { playerContext } from '../context/playerContext'
 
 export default function () {
+  
   const {setPlayer} = useContext(playerContext)
   const navigate = useNavigate()
   const [name,setName]=useState("")
